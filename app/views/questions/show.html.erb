@@ -1,0 +1,53 @@
+<% provide(:title, "question") %>
+<div class="row">
+
+  <div class="span8">
+        <h3><%= @question.title %></h3>
+        <h5><%= @question.content %></h5>
+  </div>
+  <span class="timestamp">
+
+    &nbsp&nbsp
+    <%= link_to "approve", questionapprove_path, :method => :get%>(<%= @question.approve %>)
+    &nbsp&nbsp
+    <%= link_to "invite", invite_path%>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="timestamp">Posted by <%= link_to @question.user.name, @question.user %> </span>
+  </span>
+
+  <div class="span8">
+
+    <% if @question.answers.any? %>
+        <br>
+        <ol class="answers">
+        <h4>answers (<%= @question.answers.count %>)</h4>
+
+          <% @question.answers.each do |answer| %>
+              <li>
+                <span class="content"><%= answer.content %></span>
+                <span class="timestamp">
+                Posted at <%= answer.created_at %>.
+                by <%= link_to answer.user.name, answer.user %>
+                </span>
+                <% if current_user?(answer.user)||current_user.admin %>
+                    <%= button_to "delete", answer, :method => :delete,style:"width:60px;margin-top:-30px;margin-left:330px;height:30px;float:left;" ,class: "btn btn-large btn-primary"%>
+                <% end %>
+
+              </li>
+          <% end %>
+        </ol>
+    <% end %>
+  </div>
+  <br>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/answer_form' %>
+      </section>
+    </aside>
+
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<a href="<%= user_path(current_user) %>">
+  <%= gravatar_for current_user, size: 52 %>
+</a>
+<h1>
+  <%= current_user.name %>&nbsp&nbsp
+  <%= current_user.introduction %>
+</h1>
+<span>
+<%= link_to "view my profile", current_user %>
+</span>
+<br>
+<span>
+  <%= current_user.settlement %>
+</span>
+<span>
+  <%= current_user.work %>
+</span>
+<span>
+  <%= current_user.education %>
+</span>
+<span>
+  <h2>
+    Questions(<%= current_user.questions.count %>)&nbsp
+    Answers(<%= current_user.answers.count %>)
+  </h2>
+</span>

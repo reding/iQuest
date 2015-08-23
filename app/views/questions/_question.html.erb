@@ -1,0 +1,10 @@
+<li>
+  <span class="content"><%= link_to question.title, question %></span>
+              <span class="timestamp">
+              Posted at <%= question.created_at %>.
+              </span>
+  <% if current_user?(question.user)||current_user.admin %>
+      <%= button_to "delete", question_path(question), :method => :delete ,style:"width:60px;margin-top:-18px;margin-left:250px;height:30px;float:left;" ,class: "btn btn-large btn-primary" %>
+  <% end %>
+  <br>
+</li>

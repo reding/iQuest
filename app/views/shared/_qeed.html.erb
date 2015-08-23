@@ -1,0 +1,6 @@
+<% if @qeed_items.any? %>
+    <ol class="questions">
+      <%= render partial: 'shared/qeed_item',collection: @qeed_items %>
+    </ol>
+    <%= will_paginate @qeed_items %>
+<% end %>

@@ -1,0 +1,43 @@
+<header class="navbar navbar-fixed-top navbar-inverse nav-stacked">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "iQuest", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <%= form_tag questions_path,:method => :get do %>
+          <li><%= text_field_tag :search,params[:search],style:"width:200px;float:left;margin-right:10px;color:#49525c;height:40px;",placeholder: "search topics,questions..."%></li>
+          <li><%= submit_tag "Search", :name => nil, :class => "button postfix" ,style:"width:100px;float:left;" ,class: "btn btn-large btn-primary" %></li>
+           <% end %>
+          <li><%= link_to "Home", root_path,style:"margin-left:10px;float:right;"%></li>
+          
+          <% if signed_in? %>
+              <li><%= link_to "Users", users_path ,style:"float:right;"%></li>
+              <li><%= link_to "Profile", current_user %></li>
+              <% @invite_num=Invite.where(:invited_id => current_user.id, :read => false).count+Answermsg.where(:user_id =>current_user.id, :read => false).count %>
+              <% if @invite_num!=0 %>
+              <li style="position: relative;">
+                <%= link_to "Message", invites_path ,style:"float:right;"%>
+                <span style="display: block; position: absolute; right: 0px; top: 0px; background-color: #B00100;
+                 color: #fff; border-radius: 50%; width: 20px; height: 20px; text-align: center;">
+                  <%= @invite_num%>
+                </span>
+              </li>
+                  <% else %>
+                  <li style="position: relative;">
+                    <%= link_to "Message", invites_path ,style:"float:right;"%>
+                  </li>
+                  <% end %>
+
+              <li><%= link_to "Settings", edit_user_path(current_user) ,style:"10px;float:right;"%></li>
+              <li>
+                  <%= link_to "Sign out", signout_path, method: "get" ,style:"float:right;"%>
+              </li>
+          <% else %>
+              <li><%= link_to "Sign in", signin_path ,style:"float:right;"%></li>
+          <% end %>
+           
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

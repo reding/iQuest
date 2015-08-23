@@ -1,0 +1,9 @@
+<%= form_for(@question) do |f| %>
+
+    <div class="field" >
+      <%= f.text_area :title,style: "height: 45px;resize: none;margin-bottom:3px;", placeholder: "Ask new questions..." %>
+      <h5>Question Description(optional):</h5>
+      <%= f.text_area :content,style: "height: 200px;resize: none;", placeholder: "The background and information..." %>
+    </div>
+    <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

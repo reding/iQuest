@@ -1,0 +1,15 @@
+<% if @questions.empty? %>
+    <p>No questions found</p>
+<% else %>
+    <br>
+    <ul>
+      <% @questions.each do |question| %>
+          <span class="content"><%= link_to question.title, question %></span>
+              <span class="timestamp">
+              Posted at <%= question.created_at %>. By <%= link_to question.user.name, question.user %>
+              </span>
+
+          <hr>
+      <% end %>
+    </ul>
+<% end %>

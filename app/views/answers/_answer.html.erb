@@ -1,0 +1,13 @@
+<li>
+  <% @a_question=answer.question %>
+  <span class="content"><%= link_to @a_question.title, @a_question %></span>
+  <span class="content"><%= answer.content %></span>
+  <span class="timestamp">
+  Posted at <%= answer.created_at %>.
+  by <%= link_to answer.user.name, answer.user %>
+  </span>
+  <% if current_user?(answer.user)||current_user.admin %>
+      <%= button_to "delete", answer, :method => :delete,style:"width:60px;margin-top:-30px;margin-left:330px;height:30px;float:left;" ,class: "btn btn-large btn-primary"%>
+  <% end %>
+
+</li>

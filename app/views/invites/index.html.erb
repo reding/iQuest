@@ -1,0 +1,35 @@
+
+<% if @invites.any?||@answer_msgs.any? %>
+<h1><%= t('user.messages')%></h1>
+    <% @answer_msgs.each do |answer_msg| %>
+        <li >
+      <span class="content">
+        <h5>
+          <% @user = User.find(answer_msg.answer_user) %>
+          <% @question = Question.find(answer_msg.question_id) %>
+          User <%= link_to @user.name, user_path(@user) %> answered your Question: <%= link_to @question.title, question_path(@question) %>.
+        </h5>
+      </span>
+      <span class="timestamp">
+              Posted at <%= answer_msg.created_at %>.
+              </span>
+        </li>
+    <% end %>
+    <% @invites.each do |invite| %>
+    <li >
+      <span class="content">
+        <h5>
+          <% @user = User.find(invite.invite_id) %>
+          <% @question = Question.find(invite.question_id) %>
+          User <%= link_to @user.name, user_path(@user) %> invites you to answer Question: <%= link_to @question.title, question_path(@question) %>.
+        </h5>
+      </span>
+      <span class="timestamp">
+              Posted at <%= invite.created_at %>.
+              </span>
+    </li>
+    <% end %>
+
+<% else %>
+    <h5>You have no invitation!</h5>
+<% end %>
